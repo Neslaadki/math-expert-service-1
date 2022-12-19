@@ -1,11 +1,13 @@
 package com.example.mathexpertservice1.impl.service.impl;
 
+import com.example.mathexpertservice1.api.dto.DataRq2Dto;
 import com.example.mathexpertservice1.api.dto.DataRqDto;
 import com.example.mathexpertservice1.api.dto.DataRsDto;
 import com.example.mathexpertservice1.db.model.Data;
 import com.example.mathexpertservice1.db.repository.DataRepository;
 import com.example.mathexpertservice1.db.repository.UserRepository;
 import com.example.mathexpertservice1.impl.client.RestClient;
+import com.example.mathexpertservice1.impl.dto.Request2Dto;
 import com.example.mathexpertservice1.impl.dto.RequestDto;
 import com.example.mathexpertservice1.impl.exception.NoSuchUserFound;
 import com.example.mathexpertservice1.impl.service.DataService;
@@ -26,6 +28,9 @@ public class DataServiceImpl implements DataService {
     private final UserRepository userRepository;
     private final RestClient restClient;
     @Value("${math.service-2.url.stat.post}")
+    private String service1Url;
+
+    @Value("${math.service-2.url.stat.postV2}")
     private String service2Url;
 
     @Override
@@ -35,19 +40,62 @@ public class DataServiceImpl implements DataService {
         if (user.isEmpty()) throw new NoSuchUserFound();
         var data = dataRepository.save(Data.builder().user(user.get()).payload(json).build());
         var dataList = CSVParser.getDataList(data.getPayload());
-        var responseDto = restClient.doPost(service2Url, RequestDto.builder().array(dataList).build());
+        var responseDto = restClient.doPost(service1Url, RequestDto.builder().dataset(dataList).build());
         data = data.toBuilder()
                 .dispersion(responseDto.getDispersion())
                 .expectation(responseDto.getExpectation())
                 .coefficientOfVariation(responseDto.getCoefficient_of_variation())
-                .standardDeviation(responseDto.getStandard_deviation()).build();
+                .standardDeviation(responseDto.getStandard_deviation())
+                .build();
         dataRepository.save(data);
         return DataRsDto.builder()
                 .id(data.getId())
                 .dispersion(data.getDispersion())
                 .expectation(data.getExpectation())
-                .standard_deviation(data.getStandardDeviation())
-                .coefficient_of_variation(data.getCoefficientOfVariation())
+                .standardDeviation(data.getStandardDeviation())
+                .coefficientOfVariation(data.getCoefficientOfVariation())
+                .build();
+    }
+
+    @Override
+    public DataRsDto analyze(DataRq2Dto dataRqDto) {
+        var json = FileReader.read(dataRqDto.getFilePath());
+        var user = userRepository.findById(dataRqDto.getUserId());
+        if (user.isEmpty()) throw new NoSuchUserFound();
+        var data = dataRepository.save(
+                Data.builder()
+                        .user(user.get())
+                        .payload(json)
+                        .confidenceLevel(dataRqDto.getConfidenceLevel().toString())
+                        .autocorrelationShift(dataRqDto.getAutocorrelationShift().toString())
+                        .build());
+        var dataList = CSVParser.getDataList(data.getPayload());
+        var responseDto = restClient.doPost(service2Url,
+                Request2Dto.builder()
+                        .autocorrelationShift(dataRqDto.getAutocorrelationShift())
+                        .confidenceLevel(dataRqDto.getConfidenceLevel())
+                        .dataset(dataList)
+                        .build());
+        System.out.println(responseDto.toString());
+        data = data.toBuilder()
+                .dispersion(responseDto.getDispersion())
+                .expectation(responseDto.getExpectation())
+                .coefficientOfVariation(responseDto.getCoefficient_of_variation())
+                .standardDeviation(responseDto.getStandard_deviation())
+                .confidenceInterval(responseDto.getConfidence_interval())
+                .autocorrelationCoefficient(responseDto.getAutocorrelation_coefficient())
+                .build();
+        dataRepository.save(data);
+        return DataRsDto.builder()
+                .id(data.getId())
+                .dispersion(data.getDispersion())
+                .expectation(data.getExpectation())
+                .standardDeviation(data.getStandardDeviation())
+                .coefficientOfVariation(data.getCoefficientOfVariation())
+                .autocorrelationShift(data.getAutocorrelationShift())
+                .autocorrelationCoefficient(data.getAutocorrelationCoefficient())
+                .confidenceLevel(data.getConfidenceLevel())
+                .confidenceInterval(data.getConfidenceInterval())
                 .build();
     }
 
@@ -59,8 +107,8 @@ public class DataServiceImpl implements DataService {
                 .id(data.getId())
                 .dispersion(data.getDispersion())
                 .expectation(data.getExpectation())
-                .standard_deviation(data.getStandardDeviation())
-                .coefficient_of_variation(data.getCoefficientOfVariation())
+                .standardDeviation(data.getStandardDeviation())
+                .coefficientOfVariation(data.getCoefficientOfVariation())
                 .build()).toList();
     }
 }

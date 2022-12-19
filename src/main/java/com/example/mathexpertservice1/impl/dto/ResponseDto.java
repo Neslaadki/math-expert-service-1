@@ -12,4 +12,6 @@ public class ResponseDto {
     private String dispersion;
     private String standard_deviation;
     private String coefficient_of_variation;
+    private String confidence_interval;
+    private String autocorrelation_coefficient;
 }

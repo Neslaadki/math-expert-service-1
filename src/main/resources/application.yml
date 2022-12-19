@@ -2,8 +2,8 @@ spring:
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=math
-    username: postgres
-    password: Fyyf2001
+    username:
+    password:
   main:
     banner-mode: off
   jpa:
@@ -24,3 +24,4 @@ math:
     url:
       stat:
         post: http://127.0.0.1:5000/stat
+        postV2: http://127.0.0.1:5000/stat_v2

@@ -1,16 +1,16 @@
 package com.example.mathexpertservice1.impl.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Data
-@Builder
+@Getter
+@Setter
+@SuperBuilder(toBuilder = true)
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestDto {
-    private List<Float> array;
+    private List<Float> dataset;
 }

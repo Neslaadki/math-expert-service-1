@@ -31,4 +31,14 @@ public class Data {
     private String standardDeviation;
 
     private String coefficientOfVariation;
+
+    private String confidenceLevel;
+
+    private String autocorrelationShift;
+
+    private String confidenceInterval;
+
+    private String autocorrelationCoefficient;
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.mathexpertservice1.impl.controller;
 
 import com.example.mathexpertservice1.api.controller.DataControllerV1;
+import com.example.mathexpertservice1.api.dto.DataRq2Dto;
 import com.example.mathexpertservice1.api.dto.DataRqDto;
 import com.example.mathexpertservice1.api.dto.DataRsDto;
 import com.example.mathexpertservice1.impl.service.DataService;
@@ -18,6 +19,11 @@ public class DataControllerV1Impl implements DataControllerV1 {
     @Override
     public DataRsDto analyze(DataRqDto dataRqDto) {
         return dataService.analyze(dataRqDto);
+    }
+
+    @Override
+    public DataRsDto analyze(DataRq2Dto dataRq2Dto) {
+        return dataService.analyze(dataRq2Dto);
     }
 
     @Override
