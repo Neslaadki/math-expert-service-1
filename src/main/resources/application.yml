@@ -1,14 +1,27 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: Fyyf2001
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=math
+    username:
+    password:
   main:
     banner-mode: off
-
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    schemas: math
+
 server:
   port: 8085
+
+
+math:
+  service-2:
+    url:
+      stat:
+        post: http://127.0.0.1:5000/stat
+        postV2: http://127.0.0.1:5000/stat_v2

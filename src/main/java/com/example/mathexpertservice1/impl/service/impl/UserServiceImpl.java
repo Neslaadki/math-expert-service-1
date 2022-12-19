@@ -8,20 +8,19 @@ import com.example.mathexpertservice1.impl.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+
     @Override
     public UserRsDto getUserInfo(String username) {
         var byUsername = userRepository.findByUsername(username);
-        if (byUsername.isEmpty()){
+        if (byUsername.isEmpty()) {
             return userMapper.toUserRsDto(userRepository.save(User.builder().username(username).build()));
-        }else {
+        } else {
             return userMapper.toUserRsDto(byUsername.get());
         }
     }

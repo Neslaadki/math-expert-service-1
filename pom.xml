@@ -14,6 +14,10 @@
     <name>math-expert-service-1</name>
     <description>math-expert-service-1</description>
     <properties>
+        <flyway.url>jdbc:postgresql://localhost:5432/postgres</flyway.url>
+        <flyway.user>postgres</flyway.user>
+        <flyway.password>Fyyf2001</flyway.password>
+        <flyway.schemas>math</flyway.schemas>
         <java.version>17</java.version>
     </properties>
     <dependencies>
@@ -57,10 +61,19 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>9.8.0</version>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

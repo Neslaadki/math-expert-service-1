@@ -19,7 +19,7 @@ public class Data {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     private String payload;
@@ -31,4 +31,14 @@ public class Data {
     private String standardDeviation;
 
     private String coefficientOfVariation;
+
+    private String confidenceLevel;
+
+    private String autocorrelationShift;
+
+    private String confidenceInterval;
+
+    private String autocorrelationCoefficient;
+
+
 }
