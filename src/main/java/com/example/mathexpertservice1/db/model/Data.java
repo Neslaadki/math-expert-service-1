@@ -40,5 +40,9 @@ public class Data {
 
     private String autocorrelationCoefficient;
 
+    private String equalDatasetCount;
+
+    private String equalDatasetArr;
+
 
 }
