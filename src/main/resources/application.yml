@@ -25,3 +25,4 @@ math:
       stat:
         post: http://127.0.0.1:5000/stat
         postV2: http://127.0.0.1:5000/stat_v2
+        postV3: http://127.0.0.1:5000/stat_v3

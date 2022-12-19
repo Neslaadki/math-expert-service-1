@@ -30,4 +30,6 @@ public class DataRsDto {
     private String confidenceInterval;
     @JsonProperty("autocorrelation_coefficient")
     private String autocorrelationCoefficient;
+    @JsonProperty("equal_dataset")
+    private String equalDataset;
 }

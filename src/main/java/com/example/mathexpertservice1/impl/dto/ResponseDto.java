@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,4 +16,5 @@ public class ResponseDto {
     private String coefficient_of_variation;
     private String confidence_interval;
     private String autocorrelation_coefficient;
+    private List<Float> equal_dataset;
 }

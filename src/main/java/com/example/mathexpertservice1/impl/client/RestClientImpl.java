@@ -1,6 +1,7 @@
 package com.example.mathexpertservice1.impl.client;
 
 import com.example.mathexpertservice1.impl.dto.Request2Dto;
+import com.example.mathexpertservice1.impl.dto.Request3Dto;
 import com.example.mathexpertservice1.impl.dto.RequestDto;
 import com.example.mathexpertservice1.impl.dto.ResponseDto;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,11 @@ public class RestClientImpl implements RestClient {
 
     @Override
     public ResponseDto doPost(String address, Request2Dto requestDto) {
+        return restTemplate.postForObject(address, requestDto, ResponseDto.class);
+    }
+
+    @Override
+    public ResponseDto doPost(String address, Request3Dto requestDto) {
         return restTemplate.postForObject(address, requestDto, ResponseDto.class);
     }
 }
