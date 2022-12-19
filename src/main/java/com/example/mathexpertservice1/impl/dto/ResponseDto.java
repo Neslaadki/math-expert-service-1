@@ -1,6 +1,5 @@
 package com.example.mathexpertservice1.impl.dto;
 
-import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -4,7 +4,6 @@ import com.example.mathexpertservice1.api.controller.UserControllerV1;
 import com.example.mathexpertservice1.api.dto.UserRsDto;
 import com.example.mathexpertservice1.impl.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

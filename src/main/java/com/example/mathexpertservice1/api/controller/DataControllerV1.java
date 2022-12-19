@@ -16,8 +16,4 @@ public interface DataControllerV1 {
     @GetMapping("/user/{id}")
     List<DataRsDto> getByUserId(@PathVariable("id") UUID id);
 
-    @DeleteMapping("/{id}")
-    void deleteById(@PathVariable("id") UUID id);
-
-
 }

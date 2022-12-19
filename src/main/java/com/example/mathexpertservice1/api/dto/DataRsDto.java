@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -15,7 +13,6 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 public class DataRsDto {
     private UUID id;
-    private String path;
     private String expectation;
     private String dispersion;
     private String standard_deviation;

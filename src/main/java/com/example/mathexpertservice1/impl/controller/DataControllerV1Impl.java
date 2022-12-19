@@ -4,9 +4,7 @@ import com.example.mathexpertservice1.api.controller.DataControllerV1;
 import com.example.mathexpertservice1.api.dto.DataRqDto;
 import com.example.mathexpertservice1.api.dto.DataRsDto;
 import com.example.mathexpertservice1.impl.service.DataService;
-import com.example.mathexpertservice1.impl.util.FileReader;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,7 +25,5 @@ public class DataControllerV1Impl implements DataControllerV1 {
         return dataService.getByUserId(id);
     }
 
-    @Override
-    public void deleteById(UUID id) {
-    }
+
 }

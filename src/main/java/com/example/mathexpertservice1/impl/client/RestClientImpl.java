@@ -9,7 +9,8 @@ import org.springframework.web.client.RestTemplate;
 public class RestClientImpl implements RestClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    public ResponseDto doPost(String address, RequestDto requestDto){
+
+    public ResponseDto doPost(String address, RequestDto requestDto) {
         return restTemplate.postForObject(address, requestDto, ResponseDto.class);
     }
 }
